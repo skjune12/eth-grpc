@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package api;
+
+service Example{
+  rpc Exec(TestMsg) returns (ReturnMsg);
+}
+
+message TestMsg {
+  int32 method = 1;
+  int32 value = 2;
+}
+
+message ReturnMsg {
+  string msg = 1;
+}
