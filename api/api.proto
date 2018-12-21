@@ -8,9 +8,11 @@ service Example{
 
 message TestMsg {
   int32 method = 1;
-  int32 value = 2;
+  int32 target = 2;
+  int32 value = 3;
 }
 
 message ReturnMsg {
   string msg = 1;
+  string error = 2;
 }

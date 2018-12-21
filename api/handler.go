@@ -38,7 +38,7 @@ func (s *Server) Exec(ctx context.Context, in *TestMsg) (*ReturnMsg, error) {
 		}
 	}
 
-	// setup ethereum
+	// setup ethereum client
 	client, err := ethclient.Dial("http://localhost:7545")
 	if err != nil {
 		log.Fatal(err)
@@ -71,11 +71,9 @@ func (s *Server) Exec(ctx context.Context, in *TestMsg) (*ReturnMsg, error) {
 	auth := bind.NewKeyedTransactor(privateKey)
 
 	auth.Nonce = big.NewInt(int64(nonce))
-	// auth.Value = big.NewInt(0)
 	auth.GasLimit = uint64(GasLimit)
 	auth.GasPrice = gasPrice
 
-	// contract address (string)
 	address := common.HexToAddress(os.Getenv("CONTRACT_ADDR"))
 	instance, err := contract.NewExampleContract(address, client)
 	if err != nil {
