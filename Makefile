@@ -6,7 +6,7 @@ CONTRACT := ./contract/ExampleContract
 PKGNAME  := contract
 
 .PHONY: all
-all: protoc abigen
+all: protoc abigen binary
 
 .PHONY: protoc
 protoc:
@@ -15,3 +15,12 @@ protoc:
 .PHONY: abigen
 abigen: $(CONTRACT).sol
 	abigen --sol $(CONTRACT).sol --pkg $(PKGNAME) --out=$(CONTRACT).go
+
+.PHONY: binary
+binary:
+	go build -o bin/server server/main.go
+	go build -o bin/client client/main.go
+
+.PHONY: clean
+clean:
+	rm -f bin/server bin/client
